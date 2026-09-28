@@ -1,0 +1,31 @@
+# Render Blueprint। Render ড্যাশবোর্ডে "New +" → "Blueprint" → এই repo/zip বেছে নিন।
+# এখানে কোনো secret নেই — sync: false মানে Render আপনাকে ড্যাশবোর্ডে গিয়ে মান বসাতে বলবে।
+services:
+  - type: web
+    name: ai-rashed-backend
+    runtime: python
+    plan: starter          # চাহিদা অনুযায়ী বদলান
+    region: oregon          # আপনার কাছাকাছি region বেছে নিতে পারেন
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn run:app
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      # --- অবশ্যই নিজে ড্যাশবোর্ডে বসাতে হবে (এখানে কোনো মান নেই) ---
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: APP_TOKENS
+        sync: false
+      # --- ঐচ্ছিক; না বসালে app/config.py-র ডিফল্ট ব্যবহার হবে ---
+      - key: CHAT_PROVIDER
+        sync: false
+      - key: IMAGE_PROVIDER
+        sync: false
+      - key: CHAT_MODEL
+        sync: false
+      - key: IMAGE_GENERATE_MODEL
+        sync: false
+      - key: IMAGE_EDIT_MODEL
+        sync: false
+      - key: RATE_LIMIT_PER_MIN
+        sync: false
