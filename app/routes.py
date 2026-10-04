@@ -21,7 +21,6 @@ def health_check():
 
 
 @bp.post("/v1/chat")
-@require_app_token
 def handle_chat():
     data = request.get_json() or {}
     messages = data.get("messages", [])
