@@ -1,13 +1,18 @@
 from __future__ import annotations
 
 import base64
-from flask import Blueprint, current_app, jsonify, request
+from flask import Blueprint, current_app, jsonify, request, render_template
 from app.errors import make_error_response
 from app.providers.openai_chat import OpenAIChatProvider
 from app.providers.openai_images import OpenAIImageProvider
 from app.security import require_app_token
 
 bp = Blueprint("routes", __name__)
+
+
+@bp.get("/")
+def home():
+    return render_template('index.html')
 
 
 @bp.get("/health")
